@@ -1,0 +1,158 @@
+
+
+body{
+	font-family: 'Raleway', sans-serif;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+	font-family: 'Raleway';
+  }
+
+#logo {
+	
+	position: absolute;
+	left:2vw;
+	bottom:2vw;
+	width:10vw;
+	z-index: 99;
+}
+   #zoomwrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #1E3039;
+
+  }
+
+  #zoomwrapper h3 {
+  	position: absolute;
+	top:2vh;
+	left:2vh;
+  	font-family: 'Raleway';
+  	font-size: 50px;
+  	color: #fff;
+  	text-transform: uppercase;
+  	margin:2vw 0 0 2vw;
+  }
+
+  #zoomwrapper p {
+  	position: absolute;
+	top:10vh;
+	left:2vh;
+  	font-family: 'Raleway';
+  	font-size: 30px;
+  	color:#fff;
+  	margin: .5vw 0 0 2vw;
+  	width: 80%;
+  }
+
+#zoom {
+	top:500px;
+	left:100px;
+
+  }
+  
+  #zoom2 {
+	top:250px;
+	left:280px;
+
+  }
+  
+  #zoom3 {
+	top:300px;
+	left:440px;
+
+  }
+
+  #zoom4 {
+    top:600px;
+	left:360px;
+	
+  }
+
+  #zoom5 {
+    top:450px;
+	left:600px;
+
+  }
+
+
+#zoom6 {
+	top:270px;
+	left:700px;
+
+  }
+  
+  #zoom7 {
+	top:300px;
+	left:880px;
+
+  }
+
+  #zoom8 {
+    top:550px;
+	left:950px;
+	
+  }
+
+  #zoom9 {
+    top:350px;
+	left:1120px;
+
+  }
+
+ #zoom10 {
+	top:200px;
+	left:1240px;
+
+  }
+
+  #zoom11 {
+    top:400px;
+	left:1360px;
+	
+  }
+
+  #zoom12 {
+    top:650px;
+	left:780px;
+
+  }
+  
+  .zoomProps{	  
+	height: 240px;
+    width: 230px;
+    position:absolute;
+  }
+
+
+  
+  .polaroid{
+
+text-align: center;  
+padding: 10px 10px 25px 10px;
+background: #eee;
+border: 1px solid #fff;
+-moz-box-shadow: 0px 2px 15px #333;
+-webkit-box-shadow:	0px 2px 15px #333;
+border: 1px solid #dfdfdf;
+border: 1px solid rgba(96,96,96,0.2);  
+font-family:"Imitation";
+font-size:24px;
+color:#000;
+padding-bottom:20px;
+text-shadow:#333;
+  }
+  
+  .upSky{
+	  background: #FFFFFF;
+	  
+  }
+  
+
+  
+  
+  
+  

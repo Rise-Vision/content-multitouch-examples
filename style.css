@@ -1,0 +1,129 @@
+
+
+body{
+	font-family: 'Raleway', sans-serif;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+	background-color: #1E3039;
+	color:white;
+  }
+
+#logo {
+	
+	position: absolute;
+	left:2vw;
+	bottom:2vw;
+	width:10vw;
+	z-index: 99;
+	
+}
+
+.blue {
+	color: #2f82ba;
+}
+
+
+ul{
+  margin:0px;
+  padding:0px;
+  border:0px;
+  list-style-type: none;
+  height:30px
+
+
+}
+ul li{
+  
+ float:left;
+ display:list-item;   
+   
+
+}
+ul li a{
+  
+  text-decoration:none;
+  margin-right: .5vw;
+  -webkit-border-radius: 28;
+	text-transform: uppercase;
+  border-radius: 3px;
+	color: #ffffff;
+	width: 6vw;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+	text-align: center;
+	background: #2f82ba;
+
+  
+}
+ul li a:hover{
+background: #3cb0fd;
+   
+  
+}
+
+ul li a:active{
+ background-color:#2f82ba;
+  
+}
+
+.active {
+	background: #3cb0fd;
+}
+
+
+#example1 {
+	position: absolute;
+	top:17vh;
+	left:3vw;
+}
+
+#example2 {
+	position: absolute;
+	top:17vh;
+	left:12vw;
+}
+
+#example3 {
+	position: absolute;
+	top:17vh;
+	left:21vw;
+}
+
+#example4 {
+	position: absolute;
+	top:17vh;
+	left:30vw;
+}
+
+#reset {
+	position: absolute;
+	top:17vh;
+	left:39vw;
+}
+
+h3 {
+	position: absolute;
+	top:2vh;
+	left:2vh;
+  	font-family: 'Raleway';
+  	font-size: 50px;
+  	color: #fff;
+  	text-transform: uppercase;
+  	margin:2vw 0 0 2vw;
+  }
+
+p {
+	position: absolute;
+	top:10vh;
+	left:2vh;
+  	font-family: 'Raleway';
+  	font-size: 30px;
+  	color:#fff;
+  	margin: .5vw 0 0 2vw;
+  	width: 80%;
+	font-weight: 200;
+  }
