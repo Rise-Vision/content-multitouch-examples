@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+
+  <title>Multitouch Examples</title>
+	
+	<link href='style.css' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+
+	<style>
+		#scale-element {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+
+#scale-element.reset {
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+	</style>
+	
+<script>
+var scale = 1,
+    gestureArea = document.getElementById('gesture-area'),
+    scaleElement = document.getElementById('scale-element'),
+    resetTimeout;
+
+interact(gestureArea).gesturable({
+  onstart: function (event) {
+    clearTimeout(resetTimeout);
+    scaleElement.classList.remove('reset');
+  },
+  onmove: function (event) {
+    scale = scale * (1 + event.ds);
+
+    scaleElement.style.webkitTransform =
+    scaleElement.style.transform =
+      'scale(' + scale + ')';
+  },
+  onend: function (event) {
+    resetTimeout = setTimeout(reset, 1000);
+    scaleElement.classList.add('reset');
+  }
+});
+
+function reset () {
+  scale = 1;
+  scaleElement.style.webkitTransform =
+  scaleElement.style.transform =
+    'scale(1)';
+}
+
+// prevent browser's native drag on the image
+gestureArea.addEventListener('dragstart', function (event) {
+    event.preventDefault();
+})	
+</script>	
+	
+</head>
+
+<body>
+<!-- Text -->	
+<h3>Example 4 - Sketch.js</h3>
+<p><b>Draw</b> with multitouch using sketch.js</p>
+	
+<!-- Navigation -->	
+	<ul class="list-nav">
+		<li><a id="example1" href="index.html" >example 1</a></li>
+		<li><a id="example2" href="example2.html">example 2</a></li>
+		<li><a id="example3" href="example3.html">example 3</a></li>
+		<li><a id="example4" class="active" href="example4.html">example 4</a></li>
+		<li><a id="reset" href="javascript:history.go(0)">reset</a></li>
+	</ul>
+	
+<!-- Logo -->
+<img id="logo" src="images/risevisionlogo.svg" alt=""/>
+	
+<div id="gesture-area">
+  <img id="scale-element" src="example2/images/pic1.jpg" />
+</div>
+
+</body>
+</html>
