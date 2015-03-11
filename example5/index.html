@@ -8,59 +8,7 @@
   <title>CodePen - interact.js simple slider</title>
 
     <link rel="stylesheet" href="css/style.css">
-<style>
-	#rotate-area {
-  overflow: hidden;
-}
-#scale-element {
-	
-  display: block;
-  max-width: 100%;
-  margin: auto;
-	
-}
 
-#scale-element.reset {
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
-}
-		
-#arrow {
-	position: absolute;
-	top:40vh;
-	left:20vw;
-  width: 20vw;
-  
-}
-
-#angle-info {
-  color: #fff;
-  font-size: 2em;
-  position: absolute;
-	top:40vh;
-	left:20vw;
-}
-	</style>
-	
-	<script src="example3/interact-1.2.4.min.js"></script>
-	<script>
-	var angle = 0;
-
-interact('#rotate-area').gesturable({
-  onmove: function (event) {
-    var arrow = document.getElementById('arrow');
-
-    angle += event.da;
-
-    arrow.style.webkitTransform =
-    arrow.style.transform =
-      'rotate(' + angle + 'deg)';
-
-    document.getElementById('angle-info').textContent =
-      angle.toFixed(2) + '°';
-  }
-});
-</script>
 </head>
 
 <body>
@@ -71,16 +19,6 @@ interact('#rotate-area').gesturable({
 
   <script src='https://c4d6f7d727e094887e93-4ea74b676357550bd514a6a5b344c625.ssl.cf2.rackcdn.com/interact-1.1.1.min.js'></script>
 
-	<div id="rotate-area">
-  <div id="angle-info">0&deg;</div>
-  <svg id="arrow" viewBox="0 0 100 100">
-    <polygon
-      points="50,0 75,25 62.5,25 62.5,100 37.5,100 37.5,25 25,25"
-      fill="#29e" />
-  </svg>
-	
-</div>
-	
   <script src="js/index.js"></script>
 
 </body>

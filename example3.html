@@ -8,7 +8,6 @@
 	<link href='style.css' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 	<script src="example3/interact-1.2.4.min.js"></script>
-	<script src='https://c4d6f7d727e094887e93-4ea74b676357550bd514a6a5b344c625.ssl.cf2.rackcdn.com/interact-1.1.1.min.js'></script>
 	<script>
 	var angle = 0;
 
@@ -60,56 +59,10 @@ interact('#rotate-area').gesturable({
 	top:40vh;
 	left:20vw;
 }
-		
-	
-/* the slider bar */
-.slider {
-  position: relative;
-  width: 100%;
-  height: 1em;
-  margin: 1.5em auto;
-  background-color: #29e;
-  border-radius: 0.5em;
-  box-sizing: border-box;
-  
-  font-size: 8vmin;
-  
-  -ms-touch-action: none;
-      touch-action: none;
-}
-
-/* the slider handle */
-.slider:before {
-  content: "";
-  display: block;
-  position: relative;
-  top: -0.5em;
-
-  width: 2em;
-  height: 2em;
-  margin-left: -1em;
-  border: solid 0.25em #fff;
-  border-radius: 1em;
-  background-color: inherit;
-
-  box-sizing: border-box;
-}
-
-/* display the value */
-.slider:after {
-  content: attr(data-value);
-  position: absolute;
-  top: -1.5em;
-  width: 2em;
-  line-height:1em;
-  margin-left: -1em;
-  text-align: center;
-}
-
-body { margin: 5% 10%; }	
 	</style>
 
 </head>
+
 
 <body>
 <!-- Text -->	
@@ -138,44 +91,9 @@ body { margin: 5% 10%; }
 	
 </div>
 	
-<div class="slider"></div>
-<div class="slider"></div>
-<div class="slider"></div>
-
-<script>
 	
-	!(function(window) {
-	var lastTime = 0,
-		vendors = ['webkit', 'moz'],
-		requestAnimationFrame = window.requestAnimationFrame,
-		cancelAnimationFrame = window.cancelRequestAnimationFrame,
-		i = vendors.length;
 
-	// try to un-prefix existing raf
-	while (--i >= 0) {
-		requestAnimationFrame = window[vendors[i] + 'RequestAnimationFrame'];
-		cancelAnimationFrame = window[vendors[i] + 'CancelRequestAnimationFrame'];
-	}
-
-	// polyfill with setTimeout fallback
-	// heavily inspired from @darius gist mod: https://gist.github.com/paulirish/1579671#comment-837945
-	if (!requestAnimationFrame || !cancelAnimationFrame) {
-		requestAnimationFrame = function(callback) {
-			var now = +Date.now(),
-				nextTime = Math.max(lastTime + 16, now);
-			return setTimeout(function() {
-				callback(lastTime = nextTime);
-			}, nextTime - now);
-		};
-
-		cancelAnimationFrame = clearTimeout;
-	}
-
-	// export to window
-	window.requestAnimationFrame = requestAnimationFrame;
-	window.cancelRequestAnimationFrame = cancelAnimationFrame;
-}(window));
-	</script>	
+	
  
 </body>
 </html>
