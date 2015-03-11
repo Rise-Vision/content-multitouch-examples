@@ -99,10 +99,16 @@ ul li a:active{
 	left:30vw;
 }
 
-#reset {
+#example5 {
 	position: absolute;
 	top:17vh;
 	left:39vw;
+}
+
+#reset {
+	position: absolute;
+	top:17vh;
+	left:48vw;
 }
 
 h3 {

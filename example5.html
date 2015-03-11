@@ -8,104 +8,12 @@
 	<link href='style.css' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 
-	<style>
-		#outer-dropzone {
-  height: 140px;
-}
-
-#inner-dropzone {
-  height: 80px;
-}
-
-.dropzone {
-  background-color: #ccc;
-  border: dashed 4px transparent;
-  border-radius: 4px;
-  margin: 10px auto 30px;
-  padding: 10px;
-  width: 80%;
-  transition: background-color 0.3s;
-}
-
-.drop-active {
-  border-color: #aaa;
-}
-
-.drop-target {
-  background-color: #29e;
-  border-color: #fff;
-  border-style: solid;
-}
-
-.drag-drop {
-  display: inline-block;
-  min-width: 40px;
-  padding: 2em 0.5em;
-
-  color: #fff;
-  background-color: #29e;
-  border: solid 2px #fff;
-
-  -webkit-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
-
-  transition: background-color 0.3s;
-}
-
-.drag-drop.can-drop {
-  color: #000;
-  background-color: #4e4;
-}
-	</style>
-	
-<script>
-/* The dragging code for '.draggable' from the demo above
- * applies to this demo as well so it doesn't have to be repeated. */
-
-// enable draggables to be dropped into this
-interact('.dropzone').dropzone({
-  // only accept elements matching this CSS selector
-  accept: '#yes-drop',
-  // Require a 75% element overlap for a drop to be possible
-  overlap: 0.75,
-
-  // listen for drop related events:
-
-  ondropactivate: function (event) {
-    // add active dropzone feedback
-    event.target.classList.add('drop-active');
-  },
-  ondragenter: function (event) {
-    var draggableElement = event.relatedTarget,
-        dropzoneElement = event.target;
-
-    // feedback the possibility of a drop
-    dropzoneElement.classList.add('drop-target');
-    draggableElement.classList.add('can-drop');
-    draggableElement.textContent = 'Dragged in';
-  },
-  ondragleave: function (event) {
-    // remove the drop feedback style
-    event.target.classList.remove('drop-target');
-    event.relatedTarget.classList.remove('can-drop');
-    event.relatedTarget.textContent = 'Dragged out';
-  },
-  ondrop: function (event) {
-    event.relatedTarget.textContent = 'Dropped';
-  },
-  ondropdeactivate: function (event) {
-    // remove active dropzone feedback
-    event.target.classList.remove('drop-active');
-    event.target.classList.remove('drop-target');
-  }
-});
-</script>	
-	
 </head>
+
 
 <body>
 <!-- Text -->	
-<h3>Example 4 - Sketch.js</h3>
+<h3>Example 5 - Sketch.js</h3>
 <p><b>Draw</b> with multitouch using sketch.js</p>
 	
 <!-- Navigation -->	
@@ -113,22 +21,155 @@ interact('.dropzone').dropzone({
 		<li><a id="example1" href="index.html" >example 1</a></li>
 		<li><a id="example2" href="example2.html">example 2</a></li>
 		<li><a id="example3" href="example3.html">example 3</a></li>
-		<li><a id="example4" class="active" href="example4.html">example 4</a></li>
+		<li><a id="example4" href="example4.html">example 4</a></li>
+		<li><a id="example5" class="active" href="example5.html">example 5</a></li>
 		<li><a id="reset" href="javascript:history.go(0)">reset</a></li>
 	</ul>
 	
 <!-- Logo -->
 <img id="logo" src="images/risevisionlogo.svg" alt=""/>
 	
-HTML
-<div id="no-drop" class="draggable drag-drop"> #no-drop </div>
+	 <div id="container"></div>
+        
+        <script src="example4/js/sketch.js"></script>
+        <script>
+        
+        // ----------------------------------------
+        // Particle
+        // ----------------------------------------
 
-<div id="yes-drop" class="draggable drag-drop"> #yes-drop </div>
+        function Particle( x, y, radius ) {
+            this.init( x, y, radius );
+        }
 
-<div id="outer-dropzone" class="dropzone">
-  #outer-dropzone
-  <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
- </div>
+        Particle.prototype = {
 
+            init: function( x, y, radius ) {
+
+                this.alive = true;
+
+                this.radius = radius || 10;
+                this.wander = 0.15;
+                this.theta = random( TWO_PI );
+                this.drag = 0.92;
+                this.color = '#fff';
+
+                this.x = x || 0.0;
+                this.y = y || 0.0;
+
+                this.vx = 0.0;
+                this.vy = 0.0;
+            },
+
+            move: function() {
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                this.vx *= this.drag;
+                this.vy *= this.drag;
+
+                this.theta += random( -0.5, 0.5 ) * this.wander;
+                this.vx += sin( this.theta ) * 0.1;
+                this.vy += cos( this.theta ) * 0.1;
+
+                this.radius *= 0.96;
+                this.alive = this.radius > 0.5;
+            },
+
+            draw: function( ctx ) {
+
+                ctx.beginPath();
+                ctx.arc( this.x, this.y, this.radius, 0, TWO_PI );
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        };
+
+        // ----------------------------------------
+        // Example
+        // ----------------------------------------
+
+        var MAX_PARTICLES = 280;
+        var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
+
+        var particles = [];
+        var pool = [];
+
+        var demo = Sketch.create({
+            container: document.getElementById( 'container' )
+        });
+
+        demo.setup = function() {
+
+            // Set off some initial particles.
+            var i, x, y;
+
+            for ( i = 0; i < 20; i++ ) {
+                x = ( demo.width * 0.5 ) + random( -100, 100 );
+                y = ( demo.height * 0.5 ) + random( -100, 100 );
+                demo.spawn( x, y );
+            }
+        };
+
+        demo.spawn = function( x, y ) {
+
+            if ( particles.length >= MAX_PARTICLES )
+                pool.push( particles.shift() );
+
+            particle = pool.length ? pool.pop() : new Particle();
+            particle.init( x, y, random( 5, 40 ) );
+
+            particle.wander = random( 0.5, 2.0 );
+            particle.color = random( COLOURS );
+            particle.drag = random( 0.9, 0.99 );
+
+            theta = random( TWO_PI );
+            force = random( 2, 8 );
+
+            particle.vx = sin( theta ) * force;
+            particle.vy = cos( theta ) * force;
+
+            particles.push( particle );
+        };
+
+        demo.update = function() {
+
+            var i, particle;
+
+            for ( i = particles.length - 1; i >= 0; i-- ) {
+
+                particle = particles[i];
+
+                if ( particle.alive ) particle.move();
+                else pool.push( particles.splice( i, 1 )[0] );
+            }
+        };
+
+        demo.draw = function() {
+
+            demo.globalCompositeOperation  = 'lighter';
+
+            for ( var i = particles.length - 1; i >= 0; i-- ) {
+                particles[i].draw( demo );
+            }
+        };
+
+        demo.mousemove = function() {
+
+            var particle, theta, force, touch, max, i, j, n;
+
+            for ( i = 0, n = demo.touches.length; i < n; i++ ) {
+
+                touch = demo.touches[i], max = random( 1, 4 );
+                for ( j = 0; j < max; j++ ) {
+                  demo.spawn( touch.x, touch.y );
+                }
+
+            }
+        };
+        
+        </script>
+ 
 </body>
 </html>
