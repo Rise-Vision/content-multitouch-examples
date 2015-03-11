@@ -9,53 +9,96 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
 
 	<style>
-		#scale-element {
-  display: block;
-  max-width: 100%;
-  margin: auto;
+		#outer-dropzone {
+  height: 140px;
 }
 
-#scale-element.reset {
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
+#inner-dropzone {
+  height: 80px;
+}
+
+.dropzone {
+  background-color: #ccc;
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: 80%;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
 }
 	</style>
 	
 <script>
-var scale = 1,
-    gestureArea = document.getElementById('gesture-area'),
-    scaleElement = document.getElementById('scale-element'),
-    resetTimeout;
+/* The dragging code for '.draggable' from the demo above
+ * applies to this demo as well so it doesn't have to be repeated. */
 
-interact(gestureArea).gesturable({
-  onstart: function (event) {
-    clearTimeout(resetTimeout);
-    scaleElement.classList.remove('reset');
-  },
-  onmove: function (event) {
-    scale = scale * (1 + event.ds);
+// enable draggables to be dropped into this
+interact('.dropzone').dropzone({
+  // only accept elements matching this CSS selector
+  accept: '#yes-drop',
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
 
-    scaleElement.style.webkitTransform =
-    scaleElement.style.transform =
-      'scale(' + scale + ')';
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add('drop-active');
   },
-  onend: function (event) {
-    resetTimeout = setTimeout(reset, 1000);
-    scaleElement.classList.add('reset');
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget,
+        dropzoneElement = event.target;
+
+    // feedback the possibility of a drop
+    dropzoneElement.classList.add('drop-target');
+    draggableElement.classList.add('can-drop');
+    draggableElement.textContent = 'Dragged in';
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.classList.remove('drop-target');
+    event.relatedTarget.classList.remove('can-drop');
+    event.relatedTarget.textContent = 'Dragged out';
+  },
+  ondrop: function (event) {
+    event.relatedTarget.textContent = 'Dropped';
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.classList.remove('drop-active');
+    event.target.classList.remove('drop-target');
   }
 });
-
-function reset () {
-  scale = 1;
-  scaleElement.style.webkitTransform =
-  scaleElement.style.transform =
-    'scale(1)';
-}
-
-// prevent browser's native drag on the image
-gestureArea.addEventListener('dragstart', function (event) {
-    event.preventDefault();
-})	
 </script>	
 	
 </head>
@@ -77,9 +120,15 @@ gestureArea.addEventListener('dragstart', function (event) {
 <!-- Logo -->
 <img id="logo" src="images/risevisionlogo.svg" alt=""/>
 	
-<div id="gesture-area">
-  <img id="scale-element" src="example2/images/pic1.jpg" />
-</div>
+HTML
+<div id="no-drop" class="draggable drag-drop"> #no-drop </div>
+
+<div id="yes-drop" class="draggable drag-drop"> #yes-drop </div>
+
+<div id="outer-dropzone" class="dropzone">
+  #outer-dropzone
+  <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+ </div>
 
 </body>
 </html>
